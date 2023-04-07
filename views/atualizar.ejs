@@ -1,0 +1,9 @@
+<h1>Atualizar usuário</h1>
+<hr>
+<form action="/atualizacao" method="post">
+    <input type="hidden" name="id" id="id" value="<%= usuario.id %>">
+    <input type="text" name="nome" id="nome" placeholder="Nome:" value="<%= usuario.nome %>"><br>
+    <input type="email" name="email" id="email" placeholder="E-mail:" value="<%= usuario.email %>"><br>
+    <input type="number" name="idade" id="idade" placeholder="Idade:" value="<%= usuario.idade %>"><br>
+    <button type="submit">Atualizar</button>
+</form>
