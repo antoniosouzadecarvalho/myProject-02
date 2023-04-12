@@ -26,6 +26,9 @@ const Usuarios = require("./Usuarios/ModelUsuarios")
 app.use(bodyParser.urlencoded({extends: false}));
 app.use(bodyParser.json());
 
+//Configurando arquivos estaticos
+app.use(express.static('public'));
+
 
 
 
