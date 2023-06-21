@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-//Modulo tabela do banco de dados
+//Modulo ModelUsuarios
 const Usuarios = require("./ModelUsuarios");
 
-
-router.get("/formulario", (req, res) => {
-    res.render("formulario")
+// EndPoint: Exibir EJS(./views/formulario.ejs)
+router.get("/cadastro", (req, res) => {
+    res.render("cadastro")
 });
 
+// EndPoint: Persistir USUÁRIO no DB
 router.post("/criar", (req, res) => {
-    //Dados da rota formulario
+    //Dados cadastro
     let {nome, email, idade} = req.body;
 
     //Validação (simples)
@@ -28,6 +29,7 @@ router.post("/criar", (req, res) => {
     }
 });
 
+// EndPoint: Exibir EJS(./views/atualizar.ejs)
 router.get("/atualizar/:id", (req, res) => {
     let id = req.params.id;
 
@@ -41,9 +43,9 @@ router.get("/atualizar/:id", (req, res) => {
 });
 
 
-//Atualizar dados do usuario
+// EndPoint: Atualizar USUÁRIO pelo ID no DB
 router.post("/atualizacao", (req, res) => {
-    //Dados do formulario da rota atualizar
+    //Dados atualizar
     let {id, nome, email, idade} = req.body;
 
     Usuarios.update({nome: nome, email: email, idade: idade}, {
@@ -59,6 +61,7 @@ router.post("/atualizacao", (req, res) => {
     })
 });
 
+// EndPoint: Deletar USUÁRIO pelo ID no DB
 router.get("/deletar/:id", (req, res) => {
     let id = req.params.id;
 

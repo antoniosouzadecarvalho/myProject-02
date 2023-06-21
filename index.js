@@ -1,12 +1,11 @@
 const express = require("express");
-const { addListener } = require("nodemon");
 const app = express();
 const connection = require("./database/database");
 
-//Lib para pegar dados de formulario via verbo POST
+// Body-Parser
 const bodyParser = require("body-parser");
 
-//Lib renderiza html5
+// EJS
 app.set("view engine", "ejs");
 
 
@@ -19,25 +18,21 @@ connection.authenticate()
         console.log(err)
     })
 
-//Modulo tabela de usuarios
+//Modulo ModelUsuários
 const Usuarios = require("./Usuarios/ModelUsuarios")
 
-//Configurando body-parse no express
+//Config body-parse no express
 app.use(bodyParser.urlencoded({extends: false}));
 app.use(bodyParser.json());
 
-//Configurando arquivos estaticos
-app.use(express.static('public'));
 
-
-
-
+// Modulo EndPoints Usuários
 const ControllerUsuarios = require('./Usuarios/controllerUsuarios');
 
-//Modulo Controlo de rotas
+// Config EndPoints no express
 app.use("/", ControllerUsuarios);
 
-
+// EndPoint: Raiz
 app.get("/", (req, res) => {
     Usuarios.findAll()
         .then(resulth => {
@@ -47,11 +42,6 @@ app.get("/", (req, res) => {
             console.log(err);
         })
 });
-
-
-
-
-
 
 
 app.listen(3000, () => {
